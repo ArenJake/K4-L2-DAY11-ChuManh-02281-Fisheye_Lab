@@ -1,5 +1,34 @@
 round,slice,frame,object_ref,cell,what,why,severity,owner,rule_id,evidence,action,rules_version,note
-calib,C0,adasind_019560.jpg,L1+R3,box,Box overlap,,,,,,,,
-calib,C0,adasind_019560.jpg,L3,box,Normal,,,,,,,,
-calib,C0,adasind_019560.jpg,L6+R5,box,Box overlap,,,,,,,,
-calib,C0,adasind_019560.jpg,R6,box,Normal,,,,,,,,
+calib,C0,adasind_019560.jpg,L1+R3,na,WRONG_CLASS,,,,,submission/p1_calib/compare.md,,,,Original draft note: Box overlap.
+calib,C0,adasind_019560.jpg,L3,na,SPURIOUS,,,,,submission/p1_calib/compare.md,,,,Original draft note: Normal; compare reports this as SPURIOUS.
+calib,C0,adasind_019560.jpg,L6+R5,na,WRONG_CLASS,,,,,submission/p1_calib/compare.md,,,,Original draft note: Box overlap.
+calib,C0,adasind_019560.jpg,R6,na,MISSING,,,,,submission/p1_calib/compare.md,,,,Original draft note: Normal; compare reports this as MISSING.
+r1_craft,B3-center,adasind_152940.jpg,R6,na,MISSING,,,,,,,,
+r1_craft,B3-center,adasind_167700.jpg,L6,na,IGNORE_SCOPE,,,,,,,,
+r1_craft,B3-center,adasind_167700.jpg,L7,na,IGNORE_SCOPE,,,,,,,,
+r1_craft,B3-center,adasind_167700.jpg,L8+R6,na,WRONG_CLASS,,,,,,,,
+r1_craft,B3-center,adasind_167700.jpg,R2,na,MISSING,,,,,,,,
+r1_craft,B3-center,adasind_167700.jpg,R8,na,MISSING,,,,,,,,
+r1_craft,B3-center,adasind_212280.jpg,L3,na,IGNORE_SCOPE,,,,,,,,
+r1_craft,B3-center,adasind_212280.jpg,L4+R3,na,WRONG_CLASS,,,,,,,,
+r2_qa,B3-center,adasind_152940.jpg,L5,L_only,BOX_GEOMETRY,,P3,annotator,R02,"qa_review.md: Normal; overlay L5/R1 boxes coincide with IoU 1.000",keep_with_reason,v1.0.0,"QA response: retain L5 Bike; no visible class or geometry defect."
+r3_diag,B3-center,adasind_152940.jpg,L3+R3,LR_noM,MISSING,E4_model_domain,P1,ai_team,R01,"model_compare.md: L/R both mark Truck; M misses; repeated LR_noM cases",keep_with_reason,v1.0.0,"Keep the human annotation; model miss recurs in this slice and belongs in model evaluation."
+r3_diag,B3-center,adasind_152940.jpg,L5+R1,LR_noM,MISSING,E4_model_domain,P1,ai_team,R01,"model_compare.md: L/R both mark Bike; M misses; repeated LR_noM cases",keep_with_reason,v1.0.0,"Keep the human annotation; model miss recurs in this slice and belongs in model evaluation."
+r3_diag,B3-center,adasind_152940.jpg,R6,R_only,MISSING,E5_unresolved,P1,qa,R01,"local_quality_conflicts.csv: reference ThreeWheeler H=43px; native crop is difficult to read",escalate,v1.0.0,"Check a native-resolution crop with an independent reviewer before deciding whether L omitted an in-scope object."
+r3_diag,B3-center,adasind_152940.jpg,M1,M_only,SPURIOUS,E4_model_domain,P1,ai_team,R02,"model_compare.html: offset M1 overlaps the L5/R1 Bike region; multiple M_only boxes in frame",keep_with_reason,v1.0.0,"Repeated extra or poorly aligned predictions support a model-domain issue; do not alter L from M alone."
+r3_diag,B3-center,adasind_152940.jpg,M3,M_only,SPURIOUS,E4_model_domain,P1,ai_team,R03,"model_compare.html: M3 Pedestrian overlaps the L5/R1 Bike region; other M_only predictions recur",keep_with_reason,v1.0.0,"Check rider-versus-vehicle behavior in the model set; preserve the human label pending model review."
+r3_diag,B3-center,adasind_152940.jpg,M4,M_only,SPURIOUS,E4_model_domain,P1,ai_team,R03,"model_compare.html: M4 Pedestrian overlaps the L5/R1 Bike region; other M_only predictions recur",keep_with_reason,v1.0.0,"Check rider-versus-vehicle behavior in the model set; preserve the human label pending model review."
+r3_diag,B3-center,adasind_152940.jpg,M7,M_only,SPURIOUS,E4_model_domain,P1,ai_team,R03,"model_compare.html: M7 Pedestrian is near the L4/R4 Bike region; other M_only predictions recur",keep_with_reason,v1.0.0,"Possible rider split or duplicate prediction; review as a repeated model pattern rather than reworking L."
+r3_diag,B3-center,adasind_152940.jpg,M8,M_only,SPURIOUS,E4_model_domain,P1,ai_team,R04,"model_compare.html: M8 Car differs from the L3/R3 Truck consensus; several model-only class differences occur",keep_with_reason,v1.0.0,"Model class disagreement is not evidence to change the label; review this class behavior across cases."
+r3_diag,B3-center,adasind_167700.jpg,L4+R7,LR_noM,MISSING,E4_model_domain,P1,ai_team,R01,"model_compare.md: L/R both mark Truck; M misses; same pattern appears in other objects",keep_with_reason,v1.0.0,"Keep L/R-supported annotation; include this miss in the repeated model-domain evaluation."
+r3_diag,B3-center,adasind_167700.jpg,L9+R9,LR_noM,MISSING,E4_model_domain,P1,ai_team,R01,"model_compare.md: L/R both mark Bike; M misses; same pattern appears in other objects",keep_with_reason,v1.0.0,"Keep L/R-supported annotation; include this miss in the repeated model-domain evaluation."
+r3_diag,B3-center,adasind_167700.jpg,L8,L_only,SPURIOUS,E5_unresolved,P1,qa,R04,"local_quality_conflicts.csv: L8 Car and R6 ThreeWheeler have IoU 0.903; edge crop remains ambiguous",escalate,v1.0.0,"Have a second reviewer inspect the native frame and apply R04 before choosing Car or ThreeWheeler; neither source alone is gold."
+r3_diag,B3-center,adasind_167700.jpg,R2+M7,RM_noL,MISSING,E1_annotator_error,P1,annotator,R01,"model_compare.md: reference and model both localize Bike; L has no matching box",rework,v1.0.0,"Add the in-scope object after checking its visible extent on the source frame."
+r3_diag,B3-center,adasind_167700.jpg,R6,R_only,MISSING,E1_annotator_error,P1,annotator,R01,"compare.md: reference ThreeWheeler is in scope; L has no matching box",rework,v1.0.0,"Add the visible ThreeWheeler after source-frame verification; M also misses it."
+r3_diag,B3-center,adasind_167700.jpg,R8+M9,RM_noL,MISSING,E1_annotator_error,P1,annotator,R01,"model_compare.md: reference and model both localize Truck; L has no matching box",rework,v1.0.0,"Add the in-scope Truck after checking its visible extent on the source frame."
+r3_diag,B3-center,adasind_167700.jpg,M5,M_only,SPURIOUS,E4_model_domain,P1,ai_team,R02,"model_compare.md: M5 is model-only; extra predictions recur across all three frames",keep_with_reason,v1.0.0,"Keep current annotations; include this model-only prediction in the repeated false-positive review."
+r3_diag,B3-center,adasind_167700.jpg,M8,M_only,SPURIOUS,E5_unresolved,P1,qa,R04,"model_compare.html: M8 Truck overlaps the edge object compared as L8 Car/R6 ThreeWheeler",escalate,v1.0.0,"Resolve the physical object and class with a second reviewer; the model comparison groups this edge case differently."
+r3_diag,B3-center,adasind_212280.jpg,L4+M6,LM_noR,SPURIOUS,E5_unresolved,P1,qa,R04,"local_quality_conflicts.csv: L4 Car versus R3 Bus at IoU 0.926; M6 also predicts Car",escalate,v1.0.0,"Inspect the native frame with a second reviewer to distinguish passenger van from minibus under R04."
+r3_diag,B3-center,adasind_212280.jpg,R3,R_only,MISSING,E5_unresolved,P1,qa,R04,"local_quality_conflicts.csv: R3 Bus pairs geometrically with L4 Car at IoU 0.926",escalate,v1.0.0,"This is the same unresolved Car/Bus object as L4+M6; verify van versus minibus on the native frame."
+r3_diag,B3-center,adasind_212280.jpg,M3,M_only,SPURIOUS,E4_model_domain,P1,ai_team,R03,"model_compare.html: M3 Pedestrian overlaps a Bike/rider region; similar model-only detections recur",keep_with_reason,v1.0.0,"Review whether the model splits riders from Bikes; do not alter L from this prediction alone."
+r3_diag,B3-center,adasind_212280.jpg,M5,M_only,SPURIOUS,E5_unresolved,P1,qa,R04,"model_compare.html: M5 Truck overlaps the L4 Car/R3 Bus edge conflict; geometric matching differs",escalate,v1.0.0,"Resolve the Car/Bus class and physical object first; do not count this model box as an independent object yet."
