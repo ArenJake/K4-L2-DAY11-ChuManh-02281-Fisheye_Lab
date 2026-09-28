@@ -1,1 +1,6 @@
 id,date,question,decision,rationale,status
+D01,2026-09-29,"QA note on adasind_152940 L5 says Normal","Keep L5 Bike","qa_review.md and overlay show L5/R1 coincide at IoU 1.000; no visible class or box defect; response recorded in r2_qa/qa_review.md",kept
+D02,2026-09-29,"B3-center adasind_167700 R2+M7 Bike absent from L","Rework the missing Bike box","Reference and model localize the same in-scope object; apply R01 on the source image; action=rework in findings.csv",rework
+D03,2026-09-29,"B3-center adasind_167700 L8/R6 Car versus ThreeWheeler","Escalate; do not change the class yet","IoU 0.903 confirms geometric correspondence, not class truth; full-resolution source review under R04 is still needed; see screenshots/adasind_167700_model_overlay.png",escalated
+D04,2026-09-29,"B3-center adasind_212280 L4/R3 Car versus Bus","Escalate for independent adjudication","IoU 0.926 and model Car do not settle van versus minibus; local-quality counts a wrong-class pair as FP plus FN; see screenshots/adasind_212280_model_overlay.png",escalated
+D05,2026-09-29,"B3-center adasind_167700 R8+M9 Truck absent from L","Rework the missing Truck box","Reference and model localize the same in-scope object; verify visible extent against R01 before editing; action=rework in findings.csv",rework

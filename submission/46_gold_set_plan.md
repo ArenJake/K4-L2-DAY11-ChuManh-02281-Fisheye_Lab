@@ -6,13 +6,13 @@ normal và hard slice. “Gold set” ở đây là **kế hoạch tạo** refer
 ADASIND hoặc nhãn bạn vừa vẽ. Nếu cần, dùng `notebooks/day11-svm360-colab.ipynb` để thử tổng phân bổ; notebook
 không làm thay phần lý do.
 
-| camera_id | Hard case cần chọn | Vì sao dễ sai | Annotation space / calibration cần giữ | Cách review trước khi gọi là gold |
+| camera_id | Normal và hard case cần chọn | Vì sao dễ sai | Annotation space / calibration cần giữ | Cách review trước khi gọi là gold |
 |---|---|---|---|---|
-| front | TODO | TODO | TODO | TODO |
-| rear | TODO | TODO | TODO | TODO |
-| left | TODO | TODO | TODO | TODO |
-| right | TODO | TODO | TODO | TODO |
+| front | Normal: xe phía trước và xe cắt ngang trong điều kiện ban ngày. Hard: cut-in sát đầu xe, người đi bộ/xe đạp, glare và vùng chồng front-left/right. | Perspective change, vật gần chiếm nhiều pixel, occlusion ở góc, và nhiều vật chuyển động cùng lúc. | Box/object trên ảnh fisheye gốc của front; lưu intrinsics/distortion, extrinsics tới thân xe, camera ID, timestamp và phiên bản calibration; giữ phép chiếu BEV tách biệt, có version. | Hai annotator làm độc lập và blind; QA thứ ba adjudicate disagreement bằng ảnh gốc và quy tắc class/visibility đã khóa. Báo cáo riêng theo scenario, không cho người tạo nhãn tự duyệt ca của mình. |
+| rear | Normal: xe theo sau và lùi đỗ với tầm nhìn rõ. Hard: lùi ban đêm, glare từ đèn, người đi bộ sau xe, xe đỗ che khuất và vật cắt mép ảnh. | Đèn gây blooming, phương tiện che người/vật nhỏ, chuyển động lùi làm thay đổi nhanh scale và vị trí. | Box trên ảnh gốc rear; bảo toàn timestamp đồng bộ, intrinsics/distortion, extrinsics rear-to-vehicle và version; ghi rõ frame space, không trộn tọa độ BEV vào box ảnh gốc. | Double annotation mù, reviewer độc lập soát ca hard và mẫu random normal; adjudicator ghi evidence/rule và giữ bản trước/sau quyết định. |
+| left | Normal: xe chạy kề bên trên đường thẳng qua nhiều route. Hard: xe đạp/người đi bộ sát hông, xe rẽ và vật xuất hiện gần front-left/rear-left seam. | Vùng gần méo lớn, vật có thể chỉ hiện một phần; cùng vật có thể hiện trong hai camera tại góc. | Box camera-left raw frame; giữ lens model, intrinsics/distortion, extrinsics, timestamp sync và camera mounting version; liên kết BEV bằng transform versioned, không thay annotation raw. | Hai reviewer độc lập đánh dấu class/visibility/box; QA kiểm riêng near-side và seam, mọi mismatch có log adjudication trước khi đóng gold. |
+| right | Normal: giao thông kề lề và làn bên phải trong điều kiện rõ. Hard: người/xe đạp sát lề, xe rẽ phải, occlusion bởi xe đỗ và rear-right/front-right seam. | Vật sát lề thường bị che/cắt; sai đồng bộ hoặc calibration có thể làm hai camera đặt box khác nhau dù cùng vật. | Box camera-right raw frame; lưu intrinsics/distortion, extrinsics, mounting/version, timestamps đồng bộ và mapping BEV có version; bảo toàn camera ID cho từng quan sát. | Double annotation độc lập, QA blind trên mẫu khó riêng; adjudicator dùng raw frame từng camera trước rồi mới xem phép chiếu, ghi rõ giữ hai observation hay link chung. |
 
-- Khi nào cần refresh gold set (đổi camera, calibration hoặc rule): TODO
-- Một ca seam/cross-camera cần policy và evidence trước khi ghép hai box: TODO
-- Vì sao peer agreement hoặc quality report trên ảnh một camera chưa chứng minh gold set đúng cho cả bốn camera: TODO
+- **Khi refresh:** Sau thay camera/lens/mount, calibration hoặc firmware/ISP; khi đổi taxonomy/rule; khi phát hiện drift theo mùa/thời tiết hoặc lỗi lặp mới. Version dataset/calibration và chạy review overlap trước khi thay gold cũ; không âm thầm ghi đè.
+- **Seam cần policy:** Một người đi bộ đi từ front-left sang left-camera, xuất hiện đồng thời ở hai ảnh. Trước khi link/hợp box cần synchronized timestamps, extrinsics/intrinsics đã hiệu chuẩn, vùng overlap, continuity evidence và định nghĩa output đích (giữ hai per-camera observation hay tạo một fused object/track); lưu cả source camera/box và quyết định adjudication.
+- **Giới hạn:** Peer agreement có thể phản ánh luật mơ hồ hoặc shared bias. Quality report từ ADASIND chỉ là một fisheye camera và subset class/rectangle; nó không kiểm tra đồng bộ, extrinsics, seam policy, BEV hay tracking của hệ bốn camera. Kế hoạch này tạo quy trình xây reference sau xác nhận, chưa tuyên bố có gold set đạt chuẩn.

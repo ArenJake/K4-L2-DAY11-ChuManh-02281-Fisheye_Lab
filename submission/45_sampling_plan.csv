@@ -1,9 +1,9 @@
 camera_id,slice_type,frames,risk,rationale
-front,normal,,TODO,TODO
-front,hard,,TODO,TODO
-rear,normal,,TODO,TODO
-rear,hard,,TODO,TODO
-left,normal,,TODO,TODO
-left,hard,,TODO,TODO
-right,normal,,TODO,TODO
-right,hard,,TODO,TODO
+front,normal,28,medium,"Daylight lead and crossing traffic from multiple routes; cap frames per drive and separate events to avoid near-duplicate scenes."
+front,hard,26,high,"Prioritize cut-ins, vulnerable road users, glare, partial occlusion and front-corner seam; sample across distinct drives and lighting."
+rear,normal,26,medium,"Ordinary following and low-speed reversing with clear visibility; vary parking lots and road contexts rather than adjacent frames."
+rear,hard,24,high,"Reverse maneuvers, low light, headlamp glare, pedestrians behind the vehicle and occlusion by parked vehicles."
+left,normal,25,medium,"Side-by-side traffic on varied roads; retain camera ID and timestamp and avoid counting a continuous convoy as independent cases."
+left,hard,23,high,"Near-side cyclists/pedestrians, turns, partial visibility and front/rear corner seams; spread selection across routes and sessions."
+right,normal,25,medium,"Routine curbside and adjacent-lane traffic across varied scenes, balanced by distinct sessions rather than temporal bursts."
+right,hard,23,high,"Curbside vulnerable road users, turning vehicles, occlusion and right-corner seam overlap under varied light and weather."

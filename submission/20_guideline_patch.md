@@ -1,7 +1,7 @@
-# Guideline patch
+# Guideline patch proposal
 
-- **Rule mới đề xuất:** TODO
-- **Áp dụng cho:** TODO (class/attribute/zone/ignore_region liên quan)
-- **Vì sao luật hiện tại (`docs/02-rules-vi.md`) không đủ:** TODO
-- **`rules_version` mới:** TODO (ví dụ v1.0.0 → v1.1.0)
-- **Hiệu lực từ:** TODO (round nào bắt đầu áp dụng)
+- **Rule mới đề xuất (R12 — vehicle class under insufficient edge visibility):** Khi xe bị cắt bởi vòng kính/biên ảnh và phần nhìn thấy không đủ để phân biệt các class theo R04, annotator không được chọn class chỉ theo tỷ lệ rộng/cao, dự đoán model hoặc đa số giữa hai nguồn chưa adjudicate. Giữ box/ứng viên class làm finding `E5_unresolved`, đính kèm full-frame và crop gốc, rồi yêu cầu reviewer độc lập phân xử theo dấu hiệu phương tiện nhìn thấy. Nếu dấu hiệu vẫn không đủ, ghi unresolved và chuyển QA/data owner; không suy diễn phần bị khuất và không biến ca này thành lỗi của một phía.
+- **Áp dụng cho:** Box phương tiện thuộc sáu class động, nhất là `Car`/`ThreeWheeler`/`Bus` ở `edge` hoặc bị truncated. `edge` chỉ là bin theo bán kính ảnh; rule này không suy ra khoảng cách vật tới xe. Không đổi định nghĩa class hiện hành hoặc R05–R09.
+- **Vì sao luật hiện tại (`docs/02-rules-vi.md`) chưa đủ:** R02 yêu cầu bám phần nhìn thấy và R04 định nghĩa ánh xạ class, nhưng chưa nói cách xử lý khi crop fisheye che mất dấu hiệu cần để áp dụng R04. Slice có hai ví dụ cần phân xử: `adasind_167700.jpg L8/R6` Car–ThreeWheeler (IoU 0.903) và `adasind_212280.jpg L4/R3` Car–Bus (IoU 0.926). Reference và model không phải ground truth độc lập đã xác nhận.
+- **`rules_version` mới đề xuất:** `v1.1.0` (đề xuất; chưa áp dụng và không sửa trực tiếp `docs/02-rules-vi.md`).
+- **Hiệu lực từ:** Sau khi guideline owner duyệt; pilot từ round QA/adjudication kế tiếp, rồi áp dụng cho các export mới. Không hồi tố tự động các annotation đã khóa; mở lại chỉ khi có quyết định ghi trong decision log.
