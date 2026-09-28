@@ -31,9 +31,9 @@ Kết quả mong đợi: màn hình hiện tên các lệnh như `doctor`, `mode
 
 Các khối lệnh bên dưới dùng dạng Mac `python3 lab11.py ...`. Trên Windows, chỉ thay **`python3` ở đầu dòng** bằng **`py`**, phần còn lại giữ nguyên. Ví dụ:
 
-| Bạn cần làm | Mac | Windows |
-|---|---|---|
-| Kiểm môi trường | `python3 lab11.py doctor` | `py lab11.py doctor` |
+| Bạn cần làm       | Mac                         | Windows                |
+| -------------------- | --------------------------- | ---------------------- |
+| Kiểm môi trường  | `python3 lab11.py doctor` | `py lab11.py doctor` |
 | Xem việc tiếp theo | `python3 lab11.py status` | `py lab11.py status` |
 
 Phần trong dấu `<...>` là chỗ bạn thay bằng dữ liệu của mình. Chẳng hạn `<zip-cuối>` là file ZIP bạn vừa tải từ CVAT; không gõ nguyên dấu `<` và `>`. `make` chỉ là lối tắt dành cho người đã có công cụ đó, không phải điều kiện để làm bài. [Rubric 100 điểm](RUBRIC.md) cho biết người soát xem bằng chứng nào; `python3 lab11.py check` kiểm cấu trúc và độ đầy đủ, **không chấm chất lượng nhãn hay lập luận**.
@@ -146,15 +146,15 @@ Lọc `submission/findings.csv` theo `action=rework` và `severity=P0/P1`. Chỉ
 
 ## Khi một bước không chạy
 
-| Tín hiệu | Kiểm và khôi phục |
-|---|---|
-| `python3: command not found` hoặc `py` không chạy | Gửi ảnh lỗi cho Lab Coach để cài Python 3.9 trở lên; không cài `make` và không tải file lạ để né lỗi. |
-| CVAT không mở ở `localhost:8080` | Kiểm Docker Desktop; trong thư mục CVAT Day 2 chạy `docker compose start`, trở lại repo và chạy `python3 lab11.py doctor`. |
-| Import prefill không hiện | Kiểm đúng task/slice, đúng `assets/prefill/<slice>.xml`, format **CVAT 1.1**; xem [hướng dẫn CVAT](docs/01-guide-cvat-vi.md), báo Lab Coach trước khi vẽ lại từ đầu. |
-| `draft`/`lock` báo thiếu hoặc sai frame | Export đúng job và đúng ba ảnh lệnh `python3 lab11.py cvat <slice>` in ra; nếu đã ghi `degrade frame3`, đọc số frame được phép trong [degrade](docs/08-degrade-vi.md). |
-| `reference` báo chưa khoá | Khoá đúng vòng bằng export cuối trước; không mở ZIP trong `refs/` để làm bài trước. |
-| File đã đổi sau khoá hoặc mã QA không khớp | Dùng đúng file export đã khoá. Nếu cần thay bằng file mới, ghi lý do vào decision log rồi khoá lại với `--relock`; báo người soát mã mới. |
-| Chỉ số local khác hình pre-label hoặc CVAT | Kiểm đang so **slice và đối tượng** nào, ngưỡng và ignore; đọc [taxonomy](docs/05-taxonomy-vi.md). Số trong hình P1 thuộc lần thử pre-label 48 frame, không phải điểm trên slice của bạn. |
-| `python3 lab11.py check` thất bại | Đọc từng lỗi, dùng `python3 lab11.py status` để tìm bước kế; lệnh không tự sửa nhãn hay thay quyết định của người soát. |
+| Tín hiệu                                               | Kiểm và khôi phục                                                                                                                                                                                                  |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `python3: command not found` hoặc `py` không chạy | Gửi ảnh lỗi cho Lab Coach để cài Python 3.9 trở lên; không cài`make` và không tải file lạ để né lỗi.                                                                                               |
+| CVAT không mở ở`localhost:8080`                     | Kiểm Docker Desktop; trong thư mục CVAT Day 2 chạy`docker compose start`, trở lại repo và chạy `python3 lab11.py doctor`.                                                                                  |
+| Import prefill không hiện                              | Kiểm đúng task/slice, đúng`assets/prefill/<slice>.xml`, format **CVAT 1.1**; xem [hướng dẫn CVAT](docs/01-guide-cvat-vi.md), báo Lab Coach trước khi vẽ lại từ đầu.                             |
+| `draft`/`lock` báo thiếu hoặc sai frame           | Export đúng job và đúng ba ảnh lệnh`python3 lab11.py cvat <slice>` in ra; nếu đã ghi `degrade frame3`, đọc số frame được phép trong [degrade](docs/08-degrade-vi.md).                              |
+| `reference` báo chưa khoá                           | Khoá đúng vòng bằng export cuối trước; không mở ZIP trong`refs/` để làm bài trước.                                                                                                                   |
+| File đã đổi sau khoá hoặc mã QA không khớp      | Dùng đúng file export đã khoá. Nếu cần thay bằng file mới, ghi lý do vào decision log rồi khoá lại với`--relock`; báo người soát mã mới.                                                       |
+| Chỉ số local khác hình pre-label hoặc CVAT          | Kiểm đang so**slice và đối tượng** nào, ngưỡng và ignore; đọc [taxonomy](docs/05-taxonomy-vi.md). Số trong hình P1 thuộc lần thử pre-label 48 frame, không phải điểm trên slice của bạn. |
+| `python3 lab11.py check` thất bại                    | Đọc từng lỗi, dùng`python3 lab11.py status` để tìm bước kế; lệnh không tự sửa nhãn hay thay quyết định của người soát.                                                                        |
 
 **Việc nhỏ tiếp theo khi lạc đường:** chạy `python3 lab11.py status`, mở đúng file hoặc lệnh nó gợi ý, rồi kiểm lại điểm dừng của pha hiện tại.

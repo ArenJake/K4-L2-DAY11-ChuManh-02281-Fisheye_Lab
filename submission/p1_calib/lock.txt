@@ -1,0 +1,9 @@
+round: calib
+slice: C0
+sha256: d24d147a4b12b420fd9caca065390f05f79957ed2393f5df913e7d19c070f58c
+code: D24D-147A
+locked_at: 2026-09-28T18:35:40+07:00
+shapes: box=6, polygon=3
+prefill_kept: 0
+prefill_edited: 0
+new: 6
